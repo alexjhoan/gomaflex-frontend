@@ -1,4 +1,3 @@
-import { api } from './api'
 import { useApiError } from '@/hooks/useApiError'
 
 export function useApiWithError() {
