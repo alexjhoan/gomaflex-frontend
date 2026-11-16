@@ -1,0 +1,108 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # ==========================================
+  # FRONTEND - React + Vite + Nginx
+  # ==========================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-https://api.tudominio.com}
+        VITE_API_TOKEN: ${VITE_API_TOKEN:-gomaflex-frontend-secret-token-2024}
+        VITE_APP_ORIGIN: ${VITE_APP_ORIGIN:-https://tudominio.com}
+        VITE_APP_NAME: ${VITE_APP_NAME:-GOMAFLEX}
+    container_name: gomaflex-frontend
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    networks:
+      - gomaflex-network
+    depends_on:
+      - backend
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '--spider', 'http://localhost']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ==========================================
+  # BACKEND - FastAPI + PostgreSQL
+  # ==========================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: gomaflex-backend
+    restart: unless-stopped
+    ports:
+      - '8001:8000'
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-gomaflex}
+      - API_TOKEN=${API_TOKEN:-gomaflex-frontend-secret-token-2024}
+      - DEBUG=${DEBUG:-false}
+      - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+      - EMAIL_FROM=GOMAFLEX <noreply@tudominio.com>
+      - EMAIL_TO=alexjhoan.25@gmail.com
+    volumes:
+      - ./backend:/app # Para desarrollo con hot-reload (opcional en prod)
+    networks:
+      - gomaflex-network
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8000/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+
+  # ==========================================
+  # DATABASE - PostgreSQL 16
+  # ==========================================
+  db:
+    image: postgres:16-alpine
+    container_name: gomaflex-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-gomaflex}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5433:5432' # Puerto externo diferente para no conflicto con otros postgres
+    networks:
+      - gomaflex-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-gomaflex}']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-gomaflex}']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+# ==========================================
+# NETWORKS & VOLUMES
+# ==========================================
+networks:
+  gomaflex-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

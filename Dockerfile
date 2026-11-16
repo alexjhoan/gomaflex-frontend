@@ -1,30 +1,31 @@
-# Etapa 1: Construcción (Build)
+# Dockerfile.frontend
+# Etapa 1: Builder
 FROM node:20-alpine AS builder
-
 WORKDIR /app
 
-# Argumento para VITE_API_BASE_URL (requerido en build)
+# Recibir variables de build (IMPORTANTE: antes de COPY y RUN npm run build)
 ARG VITE_API_BASE_URL
-ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+ARG VITE_API_TOKEN
+ARG VITE_APP_ORIGIN
+ARG VITE_APP_NAME
 
-# Copiar archivos de dependencias
-COPY package.json package-lock.json ./
+# Hacerlas disponibles en build time para Vite
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+ENV VITE_API_TOKEN=$VITE_API_TOKEN
+ENV VITE_APP_ORIGIN=$VITE_APP_ORIGIN
+ENV VITE_APP_NAME=$VITE_APP_NAME
+
+# Instalar dependencias
+COPY package*.json ./
 RUN npm ci
 
-# Copiar el resto del código y compilar con Vite
+# Copiar código y compilar
 COPY . .
 RUN npm run build
 
-# Etapa 2: Servidor web ligero para servir los archivos estáticos (Nginx)
-FROM nginx:alpine
-
-# Copiar los archivos compilados de Vite al directorio público de Nginx
+# Etapa 2: Nginx
+FROM nginx:alpine AS runner
 COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copiar configuración de Nginx para SPA routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Exponer el puerto web
 EXPOSE 80
-
 CMD ["nginx", "-g", "daemon off;"]
