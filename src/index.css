@@ -1,0 +1,455 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ===== CORE BRAND COLORS (Automotive Red) ===== */
+    --primary: 358 100% 36%; /* #b90014 */
+    --primary-foreground: 0 0% 100%; /* #ffffff */
+    --primary-container: 358 100% 44%; /* #e31b23 */
+    --primary-container-foreground: 10 100% 98%; /* #fff9f8 */
+    --primary-hover: 358 85% 46%; /* #D6181F */
+    --primary-subtle: 0 100% 94%; /* #FEE2E2 */
+    --primary-fixed: 10 100% 92%; /* #ffdad6 */
+    --primary-fixed-dim: 10 100% 83%; /* #ffb4ac */
+    --on-primary-fixed: 0 100% 13%; /* #410002 */
+    --on-primary-fixed-variant: 0 100% 31%; /* #93000d */
+    --inverse-primary: 10 100% 83%; /* #ffb4ac */
+
+    /* ===== SECONDARY (Industrial Graphite) ===== */
+    --secondary: 240 5% 38%; /* #5e5e62 */
+    --secondary-foreground: 0 0% 100%; /* #ffffff */
+    --secondary-container: 240 10% 90%; /* #e3e2e6 */
+    --on-secondary-container: 240 5% 40%; /* #646468 */
+    --secondary-fixed: 240 10% 90%; /* #e3e2e6 */
+    --secondary-fixed-dim: 240 5% 80%; /* #c7c6ca */
+    --on-secondary-fixed: 240 10% 10%; /* #1b1b1f */
+    --on-secondary-fixed-variant: 240 5% 28%; /* #46464a */
+
+    /* ===== TERTIARY (Neutral Gray) ===== */
+    --tertiary: 240 3% 36%; /* #595b5f */
+    --tertiary-foreground: 0 0% 100%; /* #ffffff */
+    --tertiary-container: 240 3% 46%; /* #727378 */
+    --on-tertiary-container: 240 100% 98%; /* #fafaff */
+    --tertiary-fixed: 240 10% 90%; /* #e2e2e7 */
+    --tertiary-fixed-dim: 240 5% 80%; /* #c6c6cb */
+    --on-tertiary-fixed: 230 10% 11%; /* #1a1c20 */
+    --on-tertiary-fixed-variant: 230 5% 28%; /* #45474b */
+
+    /* ===== SURFACE PALETTE ===== */
+    --surface: 240 100% 97%; /* #f9f9ff */
+    --surface-dim: 224 30% 87%; /* #d3daea */
+    --surface-bright: 240 100% 97%; /* #f9f9ff */
+    --surface-container-lowest: 0 0% 100%; /* #ffffff */
+    --surface-container-low: 231 100% 94%; /* #f0f3ff */
+    --surface-container: 228 60% 92%; /* #e7eefe */
+    --surface-container-high: 227 50% 92%; /* #e2e8f8 */
+    --surface-container-highest: 226 50% 91%; /* #dce2f3 */
+    --surface-canvas: 0 0% 100%; /* #FFFFFF */
+    --surface-subtle: 220 20% 97%; /* #F4F5F7 */
+    --surface-border: 220 13% 91%; /* #E5E7EB */
+
+    /* ===== ON SURFACE ===== */
+    --on-surface: 222 30% 12%; /* #151c27 */
+    --on-surface-variant: 10 20% 30%; /* #5d3f3c */
+
+    /* ===== INVERSE SURFACE ===== */
+    --inverse-surface: 210 20% 20%; /* #2a313d */
+    --inverse-on-surface: 225 100% 95%; /* #ebf1ff */
+
+    /* ===== OUTLINE ===== */
+    --outline: 10 20% 50%; /* #926e6b */
+    --outline-variant: 10 40% 82%; /* #e7bdb8 */
+
+    /* ===== SURFACE TINT ===== */
+    --surface-tint: 358 100% 39%; /* #c00015 */
+
+    /* ===== TEXT COLORS ===== */
+    --text-primary: 240 10% 7%; /* #121316 */
+    --text-muted: 220 10% 44%; /* #6B7280 */
+
+    /* ===== FITMENT STATUS ===== */
+    --fitment-success: 142 75% 36%; /* #16A34A */
+    --fitment-warning: 48 90% 48%; /* #EAB308 */
+
+    /* ===== BACKGROUND ===== */
+    --background: 240 100% 97%; /* #f9f9ff (same as surface) */
+    --foreground: 222 30% 12%; /* #151c27 (same as on-surface) */
+
+    /* ===== CARD / POPOVER ===== */
+    --card: 0 0% 100%; /* #ffffff */
+    --card-foreground: 222 30% 12%; /* #151c27 */
+    --popover: 0 0% 100%; /* #ffffff */
+    --popover-foreground: 222 30% 12%; /* #151c27 */
+
+    /* ===== MUTED / ACCENT ===== */
+    --muted: 220 20% 97%; /* #F4F5F7 (surface-subtle) */
+    --muted-foreground: 220 10% 44%; /* #6B7280 (text-muted) */
+    --accent: 220 20% 97%; /* #F4F5F7 */
+    --accent-foreground: 222 30% 12%; /* #151c27 */
+
+    /* ===== DESTRUCTIVE (ERROR) ===== */
+    --destructive: 0 75% 41%; /* #ba1a1a */
+    --destructive-foreground: 0 0% 100%; /* #ffffff */
+    --destructive-container: 10 100% 92%; /* #ffdad6 */
+    --on-destructive-container: 0 100% 31%; /* #93000a */
+
+    /* ===== BORDER / INPUT / RING ===== */
+    --border: 220 13% 91%; /* #E5E7EB */
+    --input: 220 13% 91%; /* #E5E7EB */
+    --ring: 358 100% 36%; /* primary */
+
+    /* ===== BORDER RADIUS ===== */
+    --radius-sm: 0.25rem; /* 4px */
+    --radius: 0.5rem; /* 8px - base */
+    --radius-md: 0.75rem; /* 12px */
+    --radius-lg: 1rem; /* 16px */
+    --radius-xl: 1.5rem; /* 24px */
+    --radius-full: 9999px; /* full pill */
+
+    /* ===== TYPOGRAPHY - FONT FAMILIES ===== */
+    --font-headline-xl: 'Chivo', sans-serif;
+    --font-headline-xl-mobile: 'Chivo', sans-serif;
+    --font-headline-lg: 'Chivo', sans-serif;
+    --font-headline-lg-mobile: 'Chivo', sans-serif;
+    --font-headline-md: 'Chivo', sans-serif;
+    --font-headline-sm: 'Chivo', sans-serif;
+    --font-label-lg: 'Chivo', sans-serif;
+    --font-label-md: 'Inter', sans-serif;
+    --font-label-sm: 'Inter', sans-serif;
+    --font-body-lg: 'Inter', sans-serif;
+    --font-body-md: 'Inter', sans-serif;
+    --font-body-sm: 'Inter', sans-serif;
+    --font-sans: 'Inter', sans-serif;
+
+    /* ===== TYPOGRAPHY - FONT SIZES & LINE HEIGHTS ===== */
+    --text-headline-xl: 40px;
+    --leading-headline-xl: 48px;
+    --tracking-headline-xl: -0.02em;
+    --font-weight-headline-xl: 800;
+
+    --text-headline-xl-mobile: 28px;
+    --leading-headline-xl-mobile: 34px;
+    --tracking-headline-xl-mobile: -0.01em;
+    --font-weight-headline-xl-mobile: 800;
+
+    --text-headline-lg: 28px;
+    --leading-headline-lg: 36px;
+    --tracking-headline-lg: -0.01em;
+    --font-weight-headline-lg: 700;
+
+    --text-headline-lg-mobile: 22px;
+    --leading-headline-lg-mobile: 28px;
+    --tracking-headline-lg-mobile: 0em;
+    --font-weight-headline-lg-mobile: 700;
+
+    --text-headline-md: 20px;
+    --leading-headline-md: 26px;
+    --font-weight-headline-md: 700;
+
+    --text-headline-sm: 16px;
+    --leading-headline-sm: 22px;
+    --font-weight-headline-sm: 700;
+
+    --text-body-lg: 16px;
+    --leading-body-lg: 24px;
+    --font-weight-body-lg: 400;
+
+    --text-body-md: 14px;
+    --leading-body-md: 20px;
+    --font-weight-body-md: 400;
+
+    --text-body-sm: 12px;
+    --leading-body-sm: 16px;
+    --font-weight-body-sm: 400;
+
+    --text-label-lg: 14px;
+    --leading-label-lg: 18px;
+    --tracking-label-lg: 0.02em;
+    --font-weight-label-lg: 700;
+
+    --text-label-md: 12px;
+    --leading-label-md: 16px;
+    --font-weight-label-md: 600;
+
+    --text-label-sm: 10px;
+    --leading-label-sm: 12px;
+    --tracking-label-sm: 0.05em;
+    --font-weight-label-sm: 700;
+
+    /* ===== SPACING ===== */
+    --spacing-gutter: 1rem; /* 16px */
+    --spacing-gutter-desktop: 1.5rem; /* 24px */
+    --spacing-margin: 1rem; /* 16px */
+    --spacing-margin-desktop: 2rem; /* 32px */
+    --spacing-space-xs: 0.25rem; /* 4px */
+    --spacing-space-sm: 0.5rem; /* 8px */
+    --spacing-space-md: 0.75rem; /* 12px */
+    --spacing-space-lg: 1rem; /* 16px */
+    --spacing-space-xl: 1.5rem; /* 24px */
+    --spacing-space-2xl: 2.5rem; /* 40px */
+
+    /* ===== SHADOWS / ELEVATION ===== */
+    --shadow-elevation-1: 0 1px 8px rgba(0, 0, 0, 0.06);
+    --shadow-elevation-2:
+      0 2px 4px -1px rgba(18, 19, 22, 0.06), 0 4px 12px -2px rgba(18, 19, 22, 0.04);
+    --shadow-elevation-3: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+    --shadow-elevation-sticky: 0 1px 8px rgba(0, 0, 0, 0.06);
+    --shadow-automotive-card:
+      0 2px 4px -1px rgba(18, 19, 22, 0.06), 0 4px 12px -2px rgba(18, 19, 22, 0.04);
+    --shadow-automotive-floating: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+
+    /* ===== CHARTS (keep existing) ===== */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    /* Dark mode overrides - using inverse surface as base */
+    --background: 210 20% 20%; /* inverse-surface */
+    --foreground: 225 100% 95%; /* inverse-on-surface */
+    --surface: 210 20% 20%;
+    --surface-dim: 210 20% 15%;
+    --surface-bright: 210 20% 25%;
+    --surface-container-lowest: 210 20% 18%;
+    --surface-container-low: 210 20% 22%;
+    --surface-container: 210 20% 24%;
+    --surface-container-high: 210 20% 26%;
+    --surface-container-highest: 210 20% 28%;
+    --surface-canvas: 210 20% 18%;
+    --surface-subtle: 210 20% 22%;
+    --surface-border: 210 15% 30%;
+    --on-surface: 225 100% 95%;
+    --on-surface-variant: 220 10% 70%;
+    --inverse-surface: 240 100% 97%;
+    --inverse-on-surface: 222 30% 12%;
+    --text-primary: 225 100% 95%;
+    --text-muted: 220 10% 65%;
+    --muted: 210 20% 22%;
+    --muted-foreground: 220 10% 65%;
+    --card: 210 20% 22%;
+    --card-foreground: 225 100% 95%;
+    --popover: 210 20% 22%;
+    --popover-foreground: 225 100% 95%;
+    --border: 210 15% 30%;
+    --input: 210 15% 30%;
+    --ring: 10 100% 83%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --primary: 10 100% 83%;
+    --primary-foreground: 210 20% 10%;
+    --primary-container: 10 100% 40%;
+    --primary-container-foreground: 10 100% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-size: var(--text-body-md);
+    line-height: var(--leading-body-md);
+    font-weight: var(--font-weight-body-md);
+  }
+
+  /* Hide scrollbar but keep scroll functionality */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Focus visible styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Selection styles */
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+}
+
+@layer components {
+  /* Container utility matching design spec */
+  .container-main {
+    @apply max-w-[100rem] mx-auto px-6 lg:px-12;
+  }
+
+  /* Section vertical rhythm */
+  .section-space {
+    @apply py-14 lg:py-16;
+  }
+
+  /* Headline utilities */
+  .text-headline-xl {
+    font-family: var(--font-headline-xl);
+    font-size: var(--text-headline-xl);
+    line-height: var(--leading-headline-xl);
+    letter-spacing: var(--tracking-headline-xl);
+    font-weight: var(--font-weight-headline-xl);
+    text-transform: uppercase;
+  }
+  .text-headline-lg {
+    font-family: var(--font-headline-lg);
+    font-size: var(--text-headline-lg);
+    line-height: var(--leading-headline-lg);
+    letter-spacing: var(--tracking-headline-lg);
+    font-weight: var(--font-weight-headline-lg);
+  }
+  .text-headline-md {
+    font-family: var(--font-headline-md);
+    font-size: var(--text-headline-md);
+    line-height: var(--leading-headline-md);
+    font-weight: var(--font-weight-headline-md);
+  }
+  .text-headline-sm {
+    font-family: var(--font-headline-sm);
+    font-size: var(--text-headline-sm);
+    line-height: var(--leading-headline-sm);
+    font-weight: var(--font-weight-headline-sm);
+  }
+
+  /* Body utilities */
+  .text-body-lg {
+    font-family: var(--font-body-lg);
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-body-lg);
+    font-weight: var(--font-weight-body-lg);
+  }
+  .text-body-md {
+    font-family: var(--font-body-md);
+    font-size: var(--text-body-md);
+    line-height: var(--leading-body-md);
+    font-weight: var(--font-weight-body-md);
+  }
+  .text-body-sm {
+    font-family: var(--font-body-sm);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-body-sm);
+    font-weight: var(--font-weight-body-sm);
+  }
+
+  /* Label utilities */
+  .text-label-lg {
+    font-family: var(--font-label-lg);
+    font-size: var(--text-label-lg);
+    line-height: var(--leading-label-lg);
+    letter-spacing: var(--tracking-label-lg);
+    font-weight: var(--font-weight-label-lg);
+    text-transform: uppercase;
+  }
+  .text-label-md {
+    font-family: var(--font-label-md);
+    font-size: var(--text-label-md);
+    line-height: var(--leading-label-md);
+    font-weight: var(--font-weight-label-md);
+  }
+  .text-label-sm {
+    font-family: var(--font-label-sm);
+    font-size: var(--text-label-sm);
+    line-height: var(--leading-label-sm);
+    letter-spacing: var(--tracking-label-sm);
+    font-weight: var(--font-weight-label-sm);
+    text-transform: uppercase;
+  }
+
+  /* Automotive card base */
+  .automotive-card {
+    @apply bg-surface-canvas rounded-xl border border-surface-border shadow-automotive-card transition-all duration-300;
+  }
+  .automotive-card-hover {
+    @apply hover:shadow-automotive-floating hover:-translate-y-1;
+  }
+
+  /* Primary CTA button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg
+           bg-primary-container hover:bg-primary-hover text-primary-foreground
+           font-label-lg text-label-lg uppercase tracking-wider
+           transition-colors shrink-0 shadow-md hover:shadow-lg;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg
+           bg-surface-subtle hover:bg-surface-variant text-text-primary
+           font-label-md text-label-md uppercase tracking-wider
+           transition-colors border border-surface-border;
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg
+           bg-transparent border-1.5 border-surface-border text-text-primary
+           hover:bg-surface-subtle hover:border-text-primary
+           font-label-md text-label-md uppercase tracking-wider
+           transition-colors;
+  }
+
+  /* Pill badge */
+  .badge-pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+           font-label-md text-label-md uppercase tracking-wider;
+  }
+
+  /* Input base */
+  .input-base {
+    @apply w-full bg-transparent font-body-md text-body-md text-text-primary
+           placeholder:text-text-muted focus:outline-none;
+  }
+
+  /* Select base */
+  .select-base {
+    @apply bg-text-primary text-surface-bright text-body-sm font-label-md
+           rounded px-2 py-1.5 focus:outline-none cursor-pointer;
+  }
+
+  /* Slider/carousel indicators */
+  .slider-dot-active {
+    @apply w-8 h-1.5 bg-primary-container rounded-full transition-all;
+  }
+  .slider-dot-inactive {
+    @apply w-3 h-1.5 bg-secondary rounded-full transition-all hover:bg-primary-container;
+  }
+}
+
+@layer utilities {
+  /* Text gradient */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary-container to-primary bg-clip-text text-transparent;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-surface-canvas/95 backdrop-blur-md;
+  }
+  .glass-dark {
+    @apply bg-inverse-surface/85 backdrop-blur;
+  }
+
+  /* Technical grid background */
+  .bg-tech-grid {
+    background-image: radial-gradient(#ffffff 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Automotive light glow */
+  .automotive-glow {
+    @apply absolute rounded-full blur-3xl pointer-events-none;
+  }
+}
