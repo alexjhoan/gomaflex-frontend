@@ -1,6 +1,32 @@
+import { useEffect, useState } from 'react';
 import { MaterialIcon } from '@/components/common';
+import { api } from '@/services/api';
 
 export function TopBar() {
+  const [tasaBCV, setTasaBCV] = useState<string>('Cargando...');
+  const [tasaError, setTasaError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchTasa = async () => {
+      try {
+        const response = await api.get<{ tasa_usd_ves: number }>('/tasa-cambio/actual');
+        // Formatear la tasa: 914.0218 -> 914,02
+        const tasaFormateada = new Intl.NumberFormat('es-VE', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(response.body.tasa_usd_ves);
+        setTasaBCV(`${tasaFormateada} VES`);
+        setTasaError(false);
+      } catch (error) {
+        console.error('Error al obtener tasa BCV:', error);
+        setTasaBCV('No disponible');
+        setTasaError(true);
+      }
+    };
+
+    fetchTasa();
+  }, []);
+
   return (
     <div className="bg-text-primary text-surface-bright">
       {/* Top Info Bar */}
@@ -40,9 +66,17 @@ export function TopBar() {
             <span className="font-label-md text-label-md text-on-tertiary-container">
               Tasa Oficial BCV:
             </span>
-            <span className="font-label-md text-label-md text-surface-bright">
-              Bs. Ref. Actualizada
+            <span className="font-label-md text-label-md text-surface-bright font-mono">
+              {tasaBCV}
             </span>
+            {tasaError && (
+              <MaterialIcon
+                name="warning"
+                size={14}
+                className="text-destructive"
+                aria-label="Error al cargar tasa"
+              />
+            )}
           </div>
 
           <div className="lg:hidden flex items-center gap-1.5 bg-inverse-surface px-3 py-1.5 rounded">
@@ -52,9 +86,17 @@ export function TopBar() {
               className="text-fitment-success"
               aria-hidden
             />
-            <span className="font-label-md text-label-md text-surface-bright">
-              BCV: 36.50 VES
+            <span className="font-label-md text-label-md text-surface-bright font-mono">
+              {tasaBCV}
             </span>
+            {tasaError && (
+              <MaterialIcon
+                name="warning"
+                size={14}
+                className="text-destructive"
+                aria-label="Error al cargar tasa"
+              />
+            )}
           </div>
 
           {/* Instagram - Desktop & Mobile: icon + name */}

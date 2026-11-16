@@ -266,13 +266,13 @@ export function HeroSlider() {
                 </button>
               </div>
 
-              {/* Panel 1: Universal Search - Simple like mobile but wider */}
+              {/* Panel 1: Universal Search - Only input and button */}
               <div
                 id="panel-universal"
                 role="tabpanel"
                 aria-labelledby="tab-universal"
                 hidden={activeSearchTab !== 'universal'}
-                className="mt-4 flex flex-col gap-3"
+                className="mt-4"
               >
                 <div className="flex flex-col md:flex-row items-stretch gap-3 bg-surface-subtle p-2 rounded-xl">
                   <div className="flex-1 flex items-center px-4 py-3 gap-3 bg-surface-canvas rounded-lg border border-surface-border">
@@ -296,32 +296,18 @@ export function HeroSlider() {
                     {isSearching ? 'Buscando...' : 'Buscar'}
                   </Button>
                 </div>
-                <p className="font-body-sm text-body-sm text-fitment-success flex items-center gap-1.5">
-                  <MaterialIcon name="verified_user" size={14} aria-hidden />
-                  Calce 100% Verificado por Especialistas en Mostrador
-                </p>
               </div>
 
-              {/* Panel 2: Vehicle Search - With Autocomplete fields */}
+              {/* Panel 2: Vehicle Search - Only 3 autocomplete inputs: Marca, Modelo, Año */}
               <div
                 id="panel-vehicle"
                 role="tabpanel"
                 aria-labelledby="tab-vehicle"
                 hidden={activeSearchTab !== 'vehicle'}
-                className="mt-4 flex flex-col gap-4"
+                className="mt-4"
               >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Year Autocomplete */}
-                  <Autocomplete
-                    label="Año"
-                    placeholder="Seleccionar año"
-                    options={yearOptions}
-                    value={vehicleYear}
-                    onChange={setVehicleYear}
-                    ariaLabel="Seleccionar año del vehículo"
-                    required
-                  />
-                  {/* Make Autocomplete */}
+                  {/* Marca Autocomplete */}
                   <Autocomplete
                     label="Marca"
                     placeholder="Seleccionar marca"
@@ -331,7 +317,7 @@ export function HeroSlider() {
                     ariaLabel="Seleccionar marca del vehículo"
                     required
                   />
-                  {/* Model Autocomplete */}
+                  {/* Modelo Autocomplete */}
                   <Autocomplete
                     label="Modelo"
                     placeholder="Seleccionar modelo"
@@ -341,16 +327,17 @@ export function HeroSlider() {
                     ariaLabel="Seleccionar modelo del vehículo"
                     required
                   />
+                  {/* Año Autocomplete */}
+                  <Autocomplete
+                    label="Año"
+                    placeholder="Seleccionar año"
+                    options={yearOptions}
+                    value={vehicleYear}
+                    onChange={setVehicleYear}
+                    ariaLabel="Seleccionar año del vehículo"
+                    required
+                  />
                 </div>
-                <div className="flex justify-end">
-                  <Button variant="primary" rightIcon="search" className="min-w-[180px]">
-                    Buscar por Vehículo
-                  </Button>
-                </div>
-                <p className="font-body-sm text-body-sm text-fitment-success flex items-center justify-center gap-1.5">
-                  <MaterialIcon name="verified_user" size={14} aria-hidden />
-                  Calce 100% Verificado por Especialistas en Mostrador
-                </p>
               </div>
             </div>
           </div>
@@ -363,7 +350,6 @@ export function HeroSlider() {
                 autoSlideInterval={5000}
                 transitionDuration={300}
                 showIndicators={true}
-                showThumbnails={true}
                 showArrows={false}
                 className="h-[380px] lg:h-[450px]"
               />

@@ -19,7 +19,6 @@ interface HeroCarouselProps {
   autoSlideInterval?: number; // ms, 0 = disabled
   transitionDuration?: number; // ms
   showIndicators?: boolean;
-  showThumbnails?: boolean;
   showArrows?: boolean;
   className?: string;
 }
@@ -29,7 +28,6 @@ export function HeroCarousel({
   autoSlideInterval = 5000,
   transitionDuration = 300,
   showIndicators = true,
-  showThumbnails = true,
   showArrows = true,
   className,
 }: HeroCarouselProps) {
@@ -244,45 +242,6 @@ export function HeroCarousel({
                     : 'w-2.5 h-2.5'
               )}
             />
-          ))}
-        </div>
-      )}
-
-      {/* Thumbnails */}
-      {showThumbnails && (
-        <div className="flex justify-center gap-2 mt-4" role="tablist" aria-label="Miniaturas de slide">
-          {slides.map((slide, index) => (
-            <button
-              key={index}
-              role="tab"
-              aria-selected={index === activeIndex}
-              aria-label={`Ver ${slide.name}`}
-              onClick={() => goToSlide(index)}
-              disabled={isTransitioning}
-              className={cn(
-                'car-thumb-btn flex flex-col items-center p-2 rounded-xl transition-all text-left group disabled:opacity-50 disabled:cursor-not-allowed',
-                index === activeIndex
-                  ? 'bg-inverse-surface border-2 border-primary-container text-surface-bright'
-                  : 'bg-inverse-surface/80 border-2 border-transparent hover:border-secondary text-surface-dim hover:text-surface-bright'
-              )}
-              aria-current={index === activeIndex ? 'true' : 'false'}
-            >
-              <div className="w-full flex items-center justify-between text-[10px] font-label-sm font-bold uppercase mb-0.5">
-                <span className={cn(index === activeIndex ? 'text-primary-container' : 'text-surface-dim')}>
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                {index === activeIndex && (
-                  <MaterialIcon name="check_circle" size={12} className="text-primary-container" aria-hidden />
-                )}
-              </div>
-              <span className={cn(
-                'font-label-md text-[11px] leading-tight truncate w-full font-bold',
-                index === activeIndex ? 'text-surface-bright' : ''
-              )}>
-                {slide.name.split(' ')[0]}
-              </span>
-              <span className="text-[9px] text-surface-dim truncate w-full">{slide.brand}</span>
-            </button>
           ))}
         </div>
       )}

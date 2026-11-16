@@ -1,15 +1,22 @@
 import { cn } from '@/utils/cn'
 
-interface SubNavProps {
-  className?: string
+interface SubNavLink {
+  path: string;
+  label: string;
+  dataPath: string;
+  external?: boolean;
 }
 
-const subNavLinks = [
+interface SubNavProps {
+  className?: string;
+}
+
+const subNavLinks: SubNavLink[] = [
   { path: '/catalogo/mangueras', label: 'Catálogo de Mangueras', dataPath: 'catalogo-de-mangueras' },
   { path: '/catalogo/guardapolvos', label: 'Guardapolvos y Fuelles', dataPath: 'guardapolvos-y-fuelles' },
   { path: '/catalogo/bujes', label: 'Bujes y Soportes', dataPath: 'bujes-y-soportes' },
   { path: '/catalogo/sellos', label: 'Sellos y O-Rings', dataPath: 'sellos-y-o-rings' },
-  { path: '/pedido-rapido', label: 'Pedido Rápido WhatsApp', dataPath: 'pedido-rapido-whatsapp' },
+  { path: 'https://wa.me/5841206259521', label: 'Pedido Rápido WhatsApp', dataPath: 'pedido-rapido-whatsapp', external: true },
   { path: '/nosotros', label: 'Nosotros', dataPath: 'nosotros' },
   { path: '/contacto', label: 'Contacto & Sede Maracay', dataPath: 'contacto-&-sede-maracay' },
 ] as const
@@ -27,6 +34,8 @@ export function SubNav({ className }: SubNavProps) {
             <a
               key={link.path}
               href={link.path}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
               className={cn(
                 'text-body-sm font-label-md px-space-md py-1.5 text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap rounded-lg',
               )}

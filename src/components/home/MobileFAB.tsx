@@ -16,7 +16,7 @@ const actions: FabAction[] = [
     icon: 'wechat',
     isWhatsApp: true,
     label: 'WhatsApp Ventas',
-    href: 'https://wa.me/',
+    href: 'https://wa.me/5841206259521',
   },
   {
     icon: 'contact_phone',

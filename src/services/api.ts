@@ -65,7 +65,7 @@ function getApiToken(): string | null {
 }
 
 // Rutas que requieren el token de API compartido
-const API_TOKEN_PATHS = ['/sugerencias', '/contacto']
+const API_TOKEN_PATHS = ['/sugerencias', '/contacto', '/tasa-cambio']
 
 function requiresApiToken(path: string): boolean {
   return API_TOKEN_PATHS.some(p => path.startsWith(p))

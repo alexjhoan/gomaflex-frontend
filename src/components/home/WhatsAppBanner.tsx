@@ -39,7 +39,7 @@ export function WhatsAppBanner() {
               variant="success"
               size="xl"
               leftIcon="support_agent"
-              onClick={() => window.open('https://wa.me/', '_blank', 'noopener,noreferrer')}
+              onClick={() => window.open('https://wa.me/5841206259521', '_blank', 'noopener,noreferrer')}
             >
               Consultar por WhatsApp
             </Button>

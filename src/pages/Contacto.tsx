@@ -179,7 +179,7 @@ export function Contacto() {
                       Respuesta inmediata de nuestros especialistas. Envíanos foto de tu repuesto con regla al lado.
                     </p>
                     <a
-                      href="https://wa.me/"
+                      href="https://wa.me/5841206259521"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-fitment-success hover:bg-fitment-success/90 text-on-primary font-label-md text-label-md uppercase tracking-wider transition-all shadow-lg hover:shadow-fitment-success/30"
