@@ -1,48 +1,46 @@
+import { useState } from 'react'
+
 import {
+  CatalogGrid,
   Header,
-  HeroSlider,
-  TrustPillars,
-  Categories,
-  WhatsAppBanner,
-  Footer,
-  FeedbackModal,
-  MobileFAB,
-} from '@/components/home';
-import { FeedbackProvider } from '@/context/FeedbackContext';
+  HeroBanner,
+  HowItWorks,
+  LandingFooter,
+  MobileTabBar,
+  OrderBuilder,
+  OrderDrawer,
+  SearchBar,
+  TrustNote,
+  WhatsAppFab,
+} from '@/components/landing'
+import { OrderProvider } from '@/context/OrderContext'
 
 export function Home() {
+  const [orderOpen, setOrderOpen] = useState(false)
+
   return (
-    <FeedbackProvider>
-      <div className="min-h-screen bg-surface">
-        {/* Header */}
-        <Header />
+    <OrderProvider>
+      <div id="inicio" className="min-h-screen bg-white pb-20 lg:pb-0">
+        <Header onOpenOrder={() => setOrderOpen(true)} />
 
-        {/* Main Content */}
-        <main className="w-full sm:pt-[15px] lg:pt-[20px] bg-surface min-h-[calc(100vh-164px)]">
-          <div className="flex flex-col w-full">
-            {/* Hero Section */}
-            <HeroSlider />
-
-            {/* Trust Pillars */}
-            <TrustPillars />
-
-            {/* Categories */}
-            <Categories />
-
-            {/* WhatsApp Banner */}
-            <WhatsAppBanner />
+        <main>
+          {/* En desktop el buscador vive en el header */}
+          <div className="container-main pt-4 lg:hidden">
+            <SearchBar />
           </div>
+
+          <HeroBanner />
+          <TrustNote />
+          <CatalogGrid />
+          <OrderBuilder />
+          <HowItWorks />
         </main>
 
-        {/* Footer */}
-        <Footer />
-
-        {/* Feedback Modal */}
-        <FeedbackModal />
-
-        {/* Mobile FAB - Dropup menu for WhatsApp, Contact, Suggestions */}
-        <MobileFAB />
+        <LandingFooter />
+        <MobileTabBar onOpenOrder={() => setOrderOpen(true)} />
+        <WhatsAppFab />
+        <OrderDrawer open={orderOpen} onOpenChange={setOrderOpen} />
       </div>
-    </FeedbackProvider>
-  );
+    </OrderProvider>
+  )
 }

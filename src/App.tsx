@@ -1,25 +1,18 @@
 import { Routes, Route } from 'react-router-dom'
 import { Layout } from '@/components/layout/Layout'
+import { SnackbarProvider } from '@/components/ui/Snackbar'
 import { Contacto } from '@/pages/Contacto'
 import { Dashboard } from '@/pages/Dashboard'
 import { Home } from '@/pages/Home'
 import { Login } from '@/pages/Login'
 import { Nosotros } from '@/pages/Nosotros'
-import { SnackbarProvider } from '@/components/ui/Snackbar'
 
 function App() {
   return (
     <SnackbarProvider>
       <Routes>
-        {/* Home page uses its own Header/Footer */}
-        <Route
-          path="/"
-          element={
-            <Layout showHeader={false} showFooter={false}>
-              <Home />
-            </Layout>
-          }
-        />
+        {/* Home aporta sus propios landmarks (header/main/footer) */}
+        <Route path="/" element={<Home />} />
         {/* Nosotros page uses its own Header/Footer */}
         <Route
           path="/nosotros"

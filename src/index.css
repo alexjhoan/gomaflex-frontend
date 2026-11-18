@@ -453,3 +453,11 @@
     @apply absolute rounded-full blur-3xl pointer-events-none;
   }
 }
+
+/* Accesibilidad: el desplazamiento suave definido en html debe respetar
+   la preferencia del sistema por movimiento reducido. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
